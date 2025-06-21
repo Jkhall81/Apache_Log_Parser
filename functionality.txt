@@ -1,0 +1,11 @@
+1. sql injection
+2. 400 -499 client errors
+3. command injection rfi / lfi
+4. directory traversal
+5. scanner & bot fingerprints
+6. rate limiting / burst detection
+7. login brute-force
+8. denied user-agent / header abuse
+9. encoded attack payloads
+10. xss attempts
+11. http method abuse
