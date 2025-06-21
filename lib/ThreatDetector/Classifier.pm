@@ -36,7 +36,7 @@ my @traversal_patterns = (
 my @xss_patterns = (
     qr/<script.*?>/i,
     qr/on\w+\s*=/i,
-    \qr/javascript:/i,
+    qr/javascript:/i,
     qr/%3Cscript/i,
 );
 
@@ -81,9 +81,9 @@ sub classify {
 }
 
 sub any_match {
-    my ($test, @patterns) = @_;
+    my ($text, @patterns) = @_;
     for my $re (@patterns) {
-        return 1 if $text && $text =~ re;
+        return 1 if $text && $text =~ $re;
     }
     return 0;
 }
