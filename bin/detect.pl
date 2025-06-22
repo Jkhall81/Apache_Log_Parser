@@ -17,6 +17,9 @@ use ThreatDetector::Handlers::DirectoryTraversal qw(get_directory_traversal_even
 use ThreatDetector::Handlers::EncodedPayload qw(get_encoded_payload_events);
 use ThreatDetector::Handlers::BotFingerprint qw(get_scanner_fingerprint_events);
 use ThreatDetector::Handlers::MethodAbuse qw(get_http_method_abuse_events);
+use ThreatDetector::Handlers::HeaderAbuse qw(get_header_abuse_events);
+use ThreatDetector::Handlers::LoginBruteForce qw(get_login_brute_force_events);
+use ThreatDetector::Handlers::RateLimiter qw(get_rate_burst_events);
 
 use Getopt::Long;
 use File::Basename;

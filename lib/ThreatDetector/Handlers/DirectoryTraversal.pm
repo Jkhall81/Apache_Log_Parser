@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_directory_traversal); 
+our @EXPORT_OK = qw(handle_directory_traversal get_directory_traversal_events);
+our @DIRECTORY_TRAVERSAL_EVENTS;
 
 sub handle_directory_traversal {
     my ($entry) = @_;
@@ -22,7 +23,12 @@ sub handle_directory_traversal {
         status => $entry->{status},
         user_agent => $entry->{user_agent},
     };
+    push @DIRECTORY_TRAVERSAL_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_directory_traversal_events {
+  return @DIRECTORY_TRAVERSAL_EVENTS;
 }
 
 1;

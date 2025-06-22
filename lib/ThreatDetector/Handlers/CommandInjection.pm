@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_command_injection);
+our @EXPORT_OK = qw(handle_command_injection get_command_injection_events);
+our @COMMAND_INJECTION_EVENTS;
 
 sub handle_command_injection {
     my ($entry) = @_;
@@ -22,7 +23,12 @@ sub handle_command_injection {
         status => $entry->{status},
         user_agent => $entry->{user_agent},
     };
+    push @COMMAND_INJECTION_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_command_injection_events {
+  return @COMMAND_INJECTION_EVENTS;
 }
 
 1;

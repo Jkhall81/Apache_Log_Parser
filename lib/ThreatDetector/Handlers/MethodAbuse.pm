@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_http_method);
+our @EXPORT_OK = qw(handle_http_method get_http_method_abuse_events);
+our @HTTP_METHOD_EVENTS;
 
 sub handle_http_method {
     my ($entry) = @_;
@@ -23,7 +24,12 @@ sub handle_http_method {
         user_agent => $entry->{user_agent},
         referer => $entry->{referer} || '',
     };
+    push @HTTP_METHOD_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_http_method_abuse_events {
+  return @HTTP_METHOD_EVENTS;
 }
 
 1;

@@ -17,7 +17,7 @@ sub handle_sql_injection {
      my $alert = {
         timestamp  => "$sec.$micro",
         type       => 'sql_injection',
-        ip         => $entry->{ip},3
+        ip         => $entry->{ip},
         method     => $entry->{method},
         uri        => $entry->{uri},
         status     => $entry->{status},

@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_login_bruteforce);
+our @EXPORT_OK = qw(handle_login_bruteforce get_login_brute_force_events);
+our @BRUTE_FORCE_EVENTS;
 
 sub handle_login_bruteforce {
     my ($entry) = @_;
@@ -23,7 +24,12 @@ sub handle_login_bruteforce {
         user_agent => $entry->{user_agent},
         referer    => $entry->{referer} || '',
     };
+    push @BRUTE_FORCE_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_login_brute_force_events {
+  return @BRUTE_FORCE_EVENTS;
 }
 
 1;

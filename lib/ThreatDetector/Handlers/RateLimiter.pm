@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_rate_burst);
+our @EXPORT_OK = qw(handle_rate_burst get_rate_burst_events);
+our @RATE_BURST_EVENTS;
 
 my %ip_activity;
 
@@ -36,9 +37,14 @@ sub handle_rate_burst {
             user_agent => $entry->{user_agent},
             referer => $entry->{referer} || '',
         };
+        push @RATE_BURST_EVENTS, $alert;
         print encode_json($alert) . "\n" if $VERBOSE;
         $ip_activity{$ip} = [];
     }
+}
+
+sub get_rate_burst_events {
+    return @RATE_BURST_EVENTS;
 }
 
 1;

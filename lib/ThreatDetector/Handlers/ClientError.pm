@@ -7,7 +7,7 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_client_error);
+our @EXPORT_OK = qw(handle_client_error get_client_error_events);
 our @CLIENT_ERROR_EVENTS;
 
 sub handle_client_error {
@@ -31,6 +31,8 @@ sub handle_client_error {
 sub get_client_error_events {
   return @CLIENT_ERROR_EVENTS;
 }
+
+1;
 
 =head1 NAME
 

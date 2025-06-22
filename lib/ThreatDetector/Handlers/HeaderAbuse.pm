@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_header_abuse);
+our @EXPORT_OK = qw(handle_header_abuse get_header_abuse_events);
+our @HEADER_ABUSE_EVENTS;
 
 sub handle_header_abuse {
     my ($entry) = @_;
@@ -23,7 +24,12 @@ sub handle_header_abuse {
         user_agent => $entry->{user_agent},
         referer => $entry->{referer} || '',
     };
+    push @HEADER_ABUSE_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_header_abuse_events {
+  return @HEADER_ABUSE_EVENTS;
 }
 
 1;

@@ -1,14 +1,17 @@
-package threatDetector::Reporter;
+package ThreatDetector::Reporter;
 
 use strict;
 use warnings;
+use Exporter 'import';
+
+our @EXPORT_OK = qw(generate_summary);
 
 sub generate_summary {
-    my ($label, $events_ref) = @_;
+    my ($label, $events_ref, $fh) = @_;
     my @events = @$events_ref;
 
-    print "\n=== $label Summary ===\n";
-    print "Total: " . scalar(@events) . "\n";
+    print $fh "\n=== $label Summary ===\n";
+    print $fh "Total: " . scalar(@events) . "\n";
 
     my (%ip_count, %uri_count);
     for my $e (@events) {
@@ -16,11 +19,11 @@ sub generate_summary {
         $uri_count{ $e->{uri} }++;
     }
 
-    print "Unique IPs:\n";
-    print " $_ ($ip_count{$_} hits)\n" for sort keys %ip_count;
+    print $fh "Unique IPs:\n";
+    print $fh " $_ ($ip_count{$_} hits)\n" for sort keys %ip_count;
 
-    print "Targeted URIs:\n";
-    print " $_ ($uri_count{$_} times)\n" for sort keys %uri_count;
+    print $fh "Targeted URIs:\n";
+    print $fh " $_ ($uri_count{$_} times)\n" for sort keys %uri_count;
 }
 
 1;

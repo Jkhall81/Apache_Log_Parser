@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_scanner);
+our @EXPORT_OK = qw(handle_scanner get_scanner_fingerprint_events);
+our @SCANNER_FINGERPRINT_EVENTS;
 
 sub handle_scanner {
     my ($entry) = @_;
@@ -22,8 +23,12 @@ sub handle_scanner {
         status => $entry->{status},
         user_agent => $entry->{user_agent},
     };
-
+    push @SCANNER_FINGERPRINT_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_scanner_fingerprint_events {
+  return @SCANNER_FINGERPRINT_EVENTS;
 }
 
 1;

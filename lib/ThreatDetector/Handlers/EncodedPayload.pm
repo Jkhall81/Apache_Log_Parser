@@ -7,7 +7,8 @@ use JSON;
 use Time::HiRes qw(gettimeofday);
 
 our $VERBOSE = 0;
-our @EXPORT_OK = qw(handle_encoded);
+our @EXPORT_OK = qw(handle_encoded get_encoded_payload_events);
+our @ENCODED_PAYLOAD_EVENTS;
 
 sub handle_encoded {
     my ($entry) = @_;
@@ -22,7 +23,12 @@ sub handle_encoded {
         status     => $entry->{status},
         user_agent => $entry->{user_agent},
     };
+    push @ENCODED_PAYLOAD_EVENTS, $alert;
     print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_encoded_payload_events {
+  return @ENCODED_PAYLOAD_EVENTS;
 }
 
 1;
