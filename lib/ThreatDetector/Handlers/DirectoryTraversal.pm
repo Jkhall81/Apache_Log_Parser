@@ -6,6 +6,7 @@ use Exporter 'import';
 use JSON;
 use Time::HiRes qw(gettimeofday);
 
+our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_directory_traversal); 
 
 sub handle_directory_traversal {
@@ -21,7 +22,7 @@ sub handle_directory_traversal {
         status => $entry->{status},
         user_agent => $entry->{user_agent},
     };
-    print encode_json($laert) . "\n";
+    print encode_json($alert) . "\n" if $VERBOSE;
 }
 
 1;

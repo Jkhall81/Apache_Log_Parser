@@ -1,0 +1,13 @@
+Sun Jun 22 10:21:48 2025 [sql_injection] 192.168.1.10 GET /index.php?id=1 UNION SELECT
+Sun Jun 22 10:21:48 2025 [scanner_fingerprint] 192.168.1.10 GET /index.php?id=1 UNION SELECT
+Sun Jun 22 10:21:48 2025 [client_error] 192.168.1.11 POST /admin/delete.php
+Sun Jun 22 10:21:48 2025 [directory_traversal] 192.168.1.12 GET /cgi-bin/test.cgi?cmd=cat /etc/passwd
+Sun Jun 22 10:21:48 2025 [client_error] 192.168.1.13 GET /../../../../etc/shadow
+Sun Jun 22 10:21:48 2025 [command_injection] 192.168.1.13 GET /../../../../etc/shadow
+Sun Jun 22 10:21:48 2025 [directory_traversal] 192.168.1.13 GET /../../../../etc/shadow
+Sun Jun 22 10:21:48 2025 [xss_attempt] 192.168.1.14 GET /search?q=<script>alert(1)</script>
+Sun Jun 22 10:21:48 2025 [xss_attempt] 192.168.1.15 GET /page.php?name=<script>
+Sun Jun 22 10:21:48 2025 [scanner_fingerprint] 192.168.1.16 PUT /api/user/123
+Sun Jun 22 10:21:48 2025 [http_method_abuse] 192.168.1.16 PUT /api/user/123
+Sun Jun 22 10:21:48 2025 [client_error] 192.168.1.17 GET /admin/login
+Sun Jun 22 10:21:48 2025 [scanner_fingerprint] 192.168.1.17 GET /admin/login

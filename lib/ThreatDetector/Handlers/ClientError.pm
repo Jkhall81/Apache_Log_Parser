@@ -6,7 +6,9 @@ use Exporter 'import';
 use JSON;
 use Time::HiRes qw(gettimeofday);
 
+our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_client_error);
+our @CLIENT_ERROR_EVENTS;
 
 sub handle_client_error {
     my ($entry) = @_;
@@ -22,7 +24,12 @@ sub handle_client_error {
         user_agent => $entry->{user_agent},
     };
 
-    print encode_json($alert) . "\n";
+    push @CLIENT_ERROR_EVENTS, $alert;
+    print encode_json($alert) . "\n" if $VERBOSE;
+}
+
+sub get_client_error_events {
+  return @CLIENT_ERROR_EVENTS;
 }
 
 =head1 NAME

@@ -6,6 +6,7 @@ use Exporter 'import';
 use JSON;
 use Time::HiRes qw(gettimeofday);
 
+our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_header_abuse);
 
 sub handle_header_abuse {
@@ -22,7 +23,7 @@ sub handle_header_abuse {
         user_agent => $entry->{user_agent},
         referer => $entry->{referer} || '',
     };
-    print encode_json($alert);
+    print encode_json($alert) . "\n" if $VERBOSE;
 }
 
 1;
