@@ -5,6 +5,7 @@ use warnings;
 use URI::Escape;
 
 our $VERSION = '0.01';
+our $VERBOSE = 0;
 
 our %STATS = (
     parsed  => 0,
@@ -13,6 +14,9 @@ our %STATS = (
 
 sub parse_log_line {
     my ($line) = @_;
+    $line =~ s/\r//g;
+
+    warn ">> parse_log_line() called with: [$line]\n" if $VERBOSE;
 
 # Common Log Format (with or without referer + user-agent)
 # Example:
@@ -22,7 +26,7 @@ sub parse_log_line {
         (\d{1,3}(?:\.\d{1,3}){3})          # IP
         \s+ \S+ \s+ \S+                    # - - (unused)
         \s+ \[([^\]]+)\]                   # [timestamp]
-        \s+ "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) # Method
+        \s+ "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH)
         \s+ ([^"]+?)                       # URI
         \s+ HTTP\/[0-9.]+"                 # Protocol
         \s+ (\d{3})                        # Status

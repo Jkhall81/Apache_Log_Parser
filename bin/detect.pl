@@ -27,15 +27,6 @@ use Time::HiRes qw(gettimeofday);
 use JSON;
 use File::Slurp;
 
-$ThreatDetector::Handlers::SQLInjection::VERBOSE       = $main::verbose;
-$ThreatDetector::Handlers::ClientError::VERBOSE        = $main::verbose;
-$ThreatDetector::Handlers::CommandInjection::VERBOSE   = $main::verbose;
-$ThreatDetector::Handlers::DirectoryTraversal::VERBOSE = $main::verbose;
-$ThreatDetector::Handlers::XSS::VERBOSE                = $main::verbose;
-$ThreatDetector::Handlers::EncodedPayload::VERBOSE     = $main::verbose;
-$ThreatDetector::Handlers::BotFingerprint::VERBOSE     = $main::verbose;
-$ThreatDetector::Handlers::MethodAbuse::VERBOSE        = $main::verbose;
-
 # ----- CONFIG -----
 my $config_file = 'config/config.json';
 my $config_data = -e $config_file ? decode_json(scalar read_file($config_file)) : {};
@@ -44,6 +35,17 @@ my $date_str = strftime("%Y-%m-%d", localtime);
 my $log_file   = $config_data->{logfile};
 my $output_log = "$config_data->{output_log}/${date_str}_threat_results.log";
 our $verbose = $config_data->{verbose};
+
+$ThreatDetector::Handlers::SQLInjection::VERBOSE       = $verbose;
+$ThreatDetector::Handlers::ClientError::VERBOSE        = $verbose;
+$ThreatDetector::Handlers::CommandInjection::VERBOSE   = $verbose;
+$ThreatDetector::Handlers::DirectoryTraversal::VERBOSE = $verbose;
+$ThreatDetector::Handlers::XSS::VERBOSE                = $verbose;
+$ThreatDetector::Handlers::EncodedPayload::VERBOSE     = $verbose;
+$ThreatDetector::Handlers::BotFingerprint::VERBOSE     = $verbose;
+$ThreatDetector::Handlers::MethodAbuse::VERBOSE        = $verbose;
+$ThreatDetector::Parser::VERBOSE = $verbose;
+
 GetOptions(
     'logfile=s' => \$log_file,
     'verbose' => \$verbose,

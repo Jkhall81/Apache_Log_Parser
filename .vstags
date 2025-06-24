@@ -68,8 +68,8 @@ ThreatDetector::Handlers::XSS::handle_xss	lib/ThreatDetector/Handlers/XSS.pm	13;
 get_xss_events	lib/ThreatDetector/Handlers/XSS.pm	32;"	s
 ThreatDetector::Handlers::XSS::get_xss_events	lib/ThreatDetector/Handlers/XSS.pm	32;"	s
 ThreatDetector::Parser	lib/ThreatDetector/Parser.pm	1;"	p
-parse_log_line	lib/ThreatDetector/Parser.pm	14;"	s
-ThreatDetector::Parser::parse_log_line	lib/ThreatDetector/Parser.pm	14;"	s
+parse_log_line	lib/ThreatDetector/Parser.pm	15;"	s
+ThreatDetector::Parser::parse_log_line	lib/ThreatDetector/Parser.pm	15;"	s
 ThreatDetector::Reporter	lib/ThreatDetector/Reporter.pm	1;"	p
 generate_summary	lib/ThreatDetector/Reporter.pm	9;"	s
 ThreatDetector::Reporter::generate_summary	lib/ThreatDetector/Reporter.pm	9;"	s
