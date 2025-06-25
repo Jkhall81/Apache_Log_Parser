@@ -2,8 +2,7 @@ use strict;
 use warnings;
 use Test::More tests => 6;
 
-use FindBin;
-use lib "$FindBin::Bin/../lib";
+use lib 'lib';
 use ThreatDetector::Parser;
 
 $ThreatDetector::Parser::STATS{parsed} = 0;
