@@ -6,6 +6,7 @@ use version;
 use Module::CoreList;
 use Term::ANSIColor;
 use File::Basename;
+use Cwd qs(abs_path);
 
 my $min_perl = version->declare('5.10.0');
 
