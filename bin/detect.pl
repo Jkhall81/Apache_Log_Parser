@@ -80,7 +80,10 @@ while (my $line = <$fh>) {
     }
 }
 
-print $out "\n===== Threat Summary Report =====\n";
+my $hostname = `hostname`;
+chomp $hostname;
+
+print $out "\n===== Threat Summary Report: $hostname =====\n";
 
 generate_summary("SQL Injection",       [ get_sqli_events() ], $out);
 generate_summary("XSS Attempts",        [ get_xss_events() ], $out);
