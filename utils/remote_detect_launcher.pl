@@ -33,16 +33,21 @@ for my $host (@targets) {
 
     print colored("\nConnecting to $remote...\n", 'cyan');
 
-    my $test = system("ssh -o BatchMode=yes -o ConnectTimeout=5 $remote 'echo ok' 2>/dev/null");
+    # Step 2a: Prime known_hosts (fingerprint)
+    print colored("Accepting host fingerprint for $ip if needed...\n", 'magenta');
+    system("ssh -o StrictHostKeyChecking=accept-new -o ConnectTimeout=5 $remote 'echo ok' >/dev/null 2>&1");
+
+    # Step 2b: Check if key access works
+    my $test = system("ssh -o BatchMode=yes -o ConnectTimeout=5 $remote 'echo ok' >/dev/null 2>&1");
 
     if ($test != 0) {
-        print colored("No key access — trying ssh-copy-id...\n", 'yellow');
+        print colored("No key access — using ssh-copy-id...\n", 'yellow');
         system("ssh-copy-id $remote");
     } else {
         print colored("Key-based SSH OK\n", 'green');
     }
 
-    # Step 3: Copy config if a log path is specified
+    # Step 3: If log path is defined, override config
     if ($host->{log}) {
         print colored("Custom config with log path: $host->{log}\n", 'blue');
 
