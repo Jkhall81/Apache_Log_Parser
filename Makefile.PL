@@ -12,6 +12,7 @@ WriteMakeFile(
     PREREQ_PM => {
     'File::Slurp' => 0,
     'IO::Scalar' => 0,
+    'IPC::System::Simple' => 0,
     'JSON' => 0,
     'URI::Escape' => 0,
 },
