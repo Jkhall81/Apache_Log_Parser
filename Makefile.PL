@@ -10,16 +10,11 @@ WriteMakeFile(
     LICENSE => 'perl',
     EXE_FILES => ['bin/detect.pl'],
     PREREQ_PM => {
-        'strict' => 0,
-        'warnings' => 0,
-        'URI::Escape' => 0,
-        'JSON' => 0,
-        'DBI' => 0,
-        'DBD:SQLite' => 0,
-        'File::Basename' => 0,
-        'Time::HiRes' => 0,
-        'Getopt::Long',
-    },
+    'File::Slurp' => 0,
+    'IO::Scalar' => 0,
+    'JSON' => 0,
+    'URI::Escape' => 0,
+},
     META_MERGE => {
         resources => {
             repository => 'https://github.com/Jkhall81/apache-threat-detector',
