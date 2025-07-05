@@ -2,7 +2,7 @@
 
 **Modular Apache Log Threat Detection for Vicidial and Linux Web Servers**
 
-ThreatDetector is a modular, extensible Perl-based tool designed to scan Apache access logs for common web attacks including SQL Injection, XSS, Command Injection, Brute Force, Directory Traversal, and more. It supports distributed scanning across multiple remote Linux machines via SSH.
+ThreatDetector is a modular, extensible, Perl-based threat detection framework for parsing Apache logs. It detects web attacks such as SQL Injection, XSS, Command Injection, Directory Traversal, and more. Designed with call center infrastructures and Vicidial clusters in mind, it supports multi-host scanning via SSH and generates rich summary reports.
 
 ---
 
@@ -12,25 +12,60 @@ ThreatDetector is a modular, extensible Perl-based tool designed to scan Apache 
   - SQL Injection
   - Cross-Site Scripting (XSS)
   - Command Injection
-  - Brute Force Logins
+  - Login Brute-Force
   - Directory Traversal
   - Encoded Payloads
   - HTTP Method Abuse
-  - Client Errors
   - Suspicious Headers
   - Bot Fingerprints
-- Generates per-host summary reports
-- Supports remote execution over SSH
-- Optional config override per host
-- Colorized CLI feedback for SSH setup and scanning
+  - 400–499 Client Errors
+- Smart, pluggable classifier
+- Per-host threat summary report
+- Multi-host support via SSH (partial WIP under `utils`)
+- Optional verbose colorized CLI output
+- Designed to work with Vicidial environments out-of-the-box
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 
-- Perl 5.10+
-- The following Perl modules (install with CPAN if missing):
+- Perl 5.10 or later
+- These CPAN modules:
 
 ```bash
 cpan install JSON File::Slurp Getopt::Long Term::ANSIColor IPC::System::Simple
+```
+
+## Project Structure
+
+- `bin/`
+  - `detect.pl` – Main scanner CLI
+- `config/`
+  - `config.json` – Log file path, output dir, verbosity
+- `data/`
+  - `ip_cache.sqlite` – (Optional future use)
+- `lib/ThreatDetector/` – Classifier, dispatcher, handlers, reporter
+- `logs/`
+  - `YYYY-MM-DD_threat_results.log` – Output reports
+- `t/`
+  - `*.t` – Unit tests
+- `utils/`
+  - `add_shebang.pl` – Add missing shebangs
+  - `check_deps.pl` – Verify/install required modules
+  - `find_used_modules.pl` – Extract used modules for PREREQ_PM
+  - `ssh_remote_runner.pl` – Remote SSH scanner (NOT COMPLETE)
+- `Makefile.PL` – CPAN build script
+- `MANIFEST` – Package contents
+- `README.md` – This file
+
+## Usage
+
+```bash
+perl bin/detect.pl --logfile /var/log/apache2/access.log
+```
+
+## Testing
+
+```bash
+prove -lv t/
 ```

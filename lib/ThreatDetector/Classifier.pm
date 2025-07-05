@@ -9,6 +9,7 @@ our $VERBOSE = 0;
 # SQL Injection patterns
 my @sqli_patterns = (
     qr/\bUNION\s+ALL\s+SELECT\b/i,
+    qr/\bUNION\s+SELECT\b/i,
     qr/\bSELECT\s+\*\s+FROM\b/i,
     qr/(?:'|")\s*or\s+\d+\s*=\s*\d+/i,
     qr/(['"]).*?\1\s*--/,

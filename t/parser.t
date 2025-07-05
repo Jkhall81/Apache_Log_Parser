@@ -16,15 +16,6 @@ $valid_line =~ s/^\s+//;
 
 my $entry = ThreatDetector::Parser::parse_log_line($valid_line);
 
-if (!defined $entry) {
-    print "DEBUG: Line did not parse.";
-    print "Line: [$valid_line]\n";
-} else {
-    print 'DEBUG: Line parsed successfully\n';
-    use Data::Dumper;
-    print($entry);
-}
-
 ok(defined $entry, 'Valid log line parsed successfully');
 is($entry->{ip}, '192.168.1.100', 'IP address parsed');
 is($entry->{uri}, '/test.php?id=5 AND 1=1', 'URI decoded correctly');

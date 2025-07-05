@@ -8,6 +8,8 @@ use IPC::System::Simple qw(system);
 use Term::ANSIColor;
 use JSON;
 
+# NOT finished
+
 my $key_path     = "$ENV{HOME}/.ssh/id_rsa.pub";
 my $private_key  = "$ENV{HOME}/.ssh/id_rsa";
 
@@ -18,12 +20,8 @@ make_path($log_dir)  unless -d $log_dir;
 make_path($output_dir) unless -d $output_dir;
 
 my @targets = (
-    { ip => '65.132.159.77',  user => 'root' },
-    { ip => '65.132.159.76',  user => 'root' },
-    { ip => '67.132.250.181', user => 'root' },
-    { ip => '67.132.250.182', user => 'root' },
-    { ip => '206.80.213.28',  user => 'root' },
-    { ip => '206.80.213.27',  user => 'root' },
+    { ip => 'ipAddr',  user => 'username' },
+ 
 );
 
 # Step 1: Ensure SSH key exists
