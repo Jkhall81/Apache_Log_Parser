@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use ExtUtils::MakeMaker;
 
-WriteMakeFile(
+WriteMakefile(
     NAME => 'ThreatDetector',
     VERSION_FROM => 'lib/ThreatDetector/Parser.pm',
     AUTHOR => 'Jason Hall <jason.kei.hall@gmail.com>',
