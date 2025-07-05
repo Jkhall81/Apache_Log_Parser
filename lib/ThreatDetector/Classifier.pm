@@ -4,11 +4,13 @@ use strict;
 use warnings;
 use URI::Escape;
 
-# SQL Injection patterns
+our $VERBOSE = 0;
 
+# SQL Injection patterns
 my @sqli_patterns = (
-    qr/\bUNION\b/i,
-    qr/\bSELECT\b/i,
+    qr/\bUNION\s+ALL\s+SELECT\b/i,
+    qr/\bSELECT\s+\*\s+FROM\b/i,
+    qr/(?:'|")\s*or\s+\d+\s*=\s*\d+/i,
     qr/(['"]).*?\1\s*--/,
     qr/or\s+1\s*=\s*1/i,
     qr/\bsleep\s*\(/i,
@@ -20,9 +22,8 @@ my @sqli_patterns = (
 my @cmd_patterns = (
     qr/;.*\b(ls|whoami|cat|curl|wget)\b/i,
     qr/\|\s*(ls|cat|uname)/i,
-    qr/\b(?:nc|bash|sh|powershell)\b/i,
-    qr/(?:http|ftp):\/\/[^ ]+/i,           # remote file includes
-    qr/\.\./,  
+    qr/(?:[;&|]\s*)(nc|bash|sh|powershell)\b/i,
+    qr/(?:http|ftp):\/\/[^ ]+/i,
 );
 
 # Directory traversal
@@ -35,7 +36,7 @@ my @traversal_patterns = (
 # XSS patterns
 my @xss_patterns = (
     qr/<script.*?>/i,
-    qr/on\w+\s*=/i,
+    qr/(?:\?|&)on(?:click|error|load|mouseover|focus|submit|keydown|keyup|blur|change)\s*=/i,
     qr/javascript:/i,
     qr/%3Cscript/i,
 );
@@ -83,7 +84,10 @@ sub classify {
 sub any_match {
     my ($text, @patterns) = @_;
     for my $re (@patterns) {
-        return 1 if $text && $text =~ $re;
+        if ($text && $text =~ $re) {
+            warn "[DEBUG] Matched pattern $re on: $text\n" if $VERBOSE;
+            return 1;
+        }
     }
     return 0;
 }

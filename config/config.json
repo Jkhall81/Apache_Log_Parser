@@ -1,5 +1,5 @@
 {
-  "logfile": "/var/log/apache2/access_log",
+  "logfile": "access_log test",
   "output_log": "logs",
   "verbose": false
 }

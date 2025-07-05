@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use lib 'lib';
 use POSIX qw(strftime);
+use File::Path qw(make_path);
 use ThreatDetector::Parser;
 use ThreatDetector::Classifier;
 use ThreatDetector::Dispatcher;
@@ -45,6 +46,7 @@ $ThreatDetector::Handlers::EncodedPayload::VERBOSE     = $verbose;
 $ThreatDetector::Handlers::BotFingerprint::VERBOSE     = $verbose;
 $ThreatDetector::Handlers::MethodAbuse::VERBOSE        = $verbose;
 $ThreatDetector::Parser::VERBOSE = $verbose;
+$ThreatDetector::Classifier::VERBOSE = $verbose;
 
 GetOptions(
     'logfile=s' => \$log_file,
@@ -52,6 +54,7 @@ GetOptions(
 );
 
 open(my $fh, '<', $log_file) or die "Can't open $log_file: $!";
+make_path($config_data->{output_log}) unless -d $config_data->{output_log};
 open(my $out, '>>', $output_log) or die "Can't write to $output_log: $!";
 
 while (my $line = <$fh>) {
@@ -75,7 +78,7 @@ while (my $line = <$fh>) {
         my $timestamp = scalar localtime($sec);
 
         my $log_line = "$timestamp [$threat_type] $entry->{ip} $entry->{method} $entry->{uri}";
-        print $out "$log_line\n";
+        # print $out "$log_line\n";
         print "$log_line\n" if $verbose;
     }
 }
