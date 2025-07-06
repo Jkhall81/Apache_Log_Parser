@@ -5,6 +5,7 @@ use warnings;
 use URI::Escape;
 
 our $VERBOSE = 0;
+our $VERSION = '0.03';
 
 # SQL Injection patterns
 my @sqli_patterns = (

@@ -4,8 +4,8 @@ use strict;
 use warnings;
 use URI::Escape;
 
-our $VERSION = '0.01';
 our $VERBOSE = 0;
+our $VERSION = '0.03';
 
 our %STATS = (
     parsed  => 0,

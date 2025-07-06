@@ -36,6 +36,19 @@ ThreatDetector is a modular, extensible, Perl-based threat detection framework f
 cpan install JSON File::Slurp Getopt::Long Term::ANSIColor IPC::System::Simple
 ```
 
+```bash
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use ThreatDetector;
+
+my $log_file    = '/var/log/apache2/access.log';
+my $config_file = '/etc/threatdetector/config.json';  # or wherever you placed it
+
+ThreatDetector::analyze_log($log_file, $config_file);
+```
+
 ## Project Structure
 
 - `bin/`

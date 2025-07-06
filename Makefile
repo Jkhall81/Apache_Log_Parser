@@ -21,7 +21,7 @@
 #     NAME => q[ThreatDetector]
 #     PREREQ_PM => { File::Slurp=>q[0], IO::Scalar=>q[0], IPC::System::Simple=>q[0], JSON=>q[0], URI::Escape=>q[0] }
 #     TEST_REQUIRES => {  }
-#     VERSION_FROM => q[lib/ThreatDetector/Parser.pm]
+#     VERSION_FROM => q[lib/ThreatDetector/ThreatDetector.pm]
 
 # --- MakeMaker post_initialize section:
 
@@ -63,11 +63,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = ThreatDetector
 NAME_SYM = ThreatDetector
-VERSION = 0.01
+VERSION = 0.03
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_01
+VERSION_SYM = 0_03
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.01
+XS_VERSION = 0.03
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib\arch
@@ -159,7 +159,7 @@ FULLEXT = ThreatDetector
 BASEEXT = ThreatDetector
 PARENT_NAME = 
 DLBASE = $(BASEEXT)
-VERSION_FROM = lib/ThreatDetector/Parser.pm
+VERSION_FROM = lib/ThreatDetector/ThreatDetector.pm
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -208,7 +208,8 @@ TO_INST_PM = lib/ThreatDetector/Classifier.pm \
 	lib/ThreatDetector/Handlers/SQLInjection.pm \
 	lib/ThreatDetector/Handlers/XSS.pm \
 	lib/ThreatDetector/Parser.pm \
-	lib/ThreatDetector/Reporter.pm
+	lib/ThreatDetector/Reporter.pm \
+	lib/ThreatDetector/ThreatDetector.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -276,7 +277,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = ThreatDetector
-DISTVNAME = ThreatDetector-0.01
+DISTVNAME = ThreatDetector-0.03
 
 
 # --- MakeMaker macro section:
@@ -545,7 +546,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) "  URI::Escape: '0'" >> META_new.yml
 	$(NOECHO) $(ECHO) resources: >> META_new.yml
 	$(NOECHO) $(ECHO) "  repository: https://github.com/Jkhall81/apache-threat-detector" >> META_new.yml
-	$(NOECHO) $(ECHO) "version: '0.01'" >> META_new.yml
+	$(NOECHO) $(ECHO) "version: '0.03'" >> META_new.yml
 	$(NOECHO) $(ECHO) "x_serialization_backend: 'CPAN::Meta::YAML version 0.018'" >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
@@ -597,7 +598,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) "         \"url\" : \"https://github.com/Jkhall81/apache-threat-detector\"" >> META_new.json
 	$(NOECHO) $(ECHO) "      }" >> META_new.json
 	$(NOECHO) $(ECHO) "   }," >> META_new.json
-	$(NOECHO) $(ECHO) "   \"version\" : \"0.01\"," >> META_new.json
+	$(NOECHO) $(ECHO) "   \"version\" : \"0.03\"," >> META_new.json
 	$(NOECHO) $(ECHO) "   \"x_serialization_backend\" : \"JSON::PP version 4.16\"" >> META_new.json
 	$(NOECHO) $(ECHO) } >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
@@ -907,7 +908,7 @@ testdb_static :: static pure_all
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"ThreatDetector\" VERSION=\"0.01\">" > ThreatDetector.ppd
+	$(NOECHO) $(ECHO) "<SOFTPKG NAME=\"ThreatDetector\" VERSION=\"0.03\">" > ThreatDetector.ppd
 	$(NOECHO) $(ECHO) "    <ABSTRACT>Modular Apache Log Threat Detection for Vicidial</ABSTRACT>" >> ThreatDetector.ppd
 	$(NOECHO) $(ECHO) "    <AUTHOR>Jason Hall &lt;jason.kei.hall@gmail.com&gt;</AUTHOR>" >> ThreatDetector.ppd
 	$(NOECHO) $(ECHO) "    <IMPLEMENTATION>" >> ThreatDetector.ppd
@@ -941,7 +942,8 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	  lib/ThreatDetector/Handlers/XSS.pm blib\lib\ThreatDetector\Handlers\XSS.pm \
 	  lib/ThreatDetector/Parser.pm blib\lib\ThreatDetector\Parser.pm 
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e "pm_to_blib({@ARGV}, '$(INST_LIB)\auto', q[$(PM_FILTER)], '$(PERM_DIR)')" -- \
-	  lib/ThreatDetector/Reporter.pm blib\lib\ThreatDetector\Reporter.pm 
+	  lib/ThreatDetector/Reporter.pm blib\lib\ThreatDetector\Reporter.pm \
+	  lib/ThreatDetector/ThreatDetector.pm blib\lib\ThreatDetector\ThreatDetector.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

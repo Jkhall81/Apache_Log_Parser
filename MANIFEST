@@ -1,3 +1,4 @@
+.vstags
 bin/detect.pl
 config/config.json
 data/ip_cache.sqlite
@@ -16,6 +17,8 @@ lib/ThreatDetector/Handlers/SQLInjection.pm
 lib/ThreatDetector/Handlers/XSS.pm
 lib/ThreatDetector/Parser.pm
 lib/ThreatDetector/Reporter.pm
+lib/ThreatDetector/ThreatDetector.pm
+LICENSE
 Makefile.PL
 MANIFEST			This list of files
 README.md
@@ -39,3 +42,4 @@ utils/add_shebang.pl
 utils/check_deps.pl
 utils/find_used_modules.pl
 utils/remote_detect_launcher.pl
+utils/versionUpdate.pl

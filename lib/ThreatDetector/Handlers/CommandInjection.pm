@@ -9,6 +9,7 @@ use Time::HiRes qw(gettimeofday);
 our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_command_injection get_command_injection_events);
 our @COMMAND_INJECTION_EVENTS;
+our $VERSION = '0.03';
 
 sub handle_command_injection {
     my ($entry) = @_;

@@ -9,6 +9,7 @@ use Time::HiRes qw(gettimeofday);
 our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_sql_injection get_sqli_events);
 our @SQLI_EVENTS;
+our $VERSION = '0.03';
 
 sub handle_sql_injection {
     my ($entry) = @_;

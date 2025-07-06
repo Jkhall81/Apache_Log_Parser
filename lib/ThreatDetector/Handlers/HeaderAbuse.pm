@@ -9,6 +9,7 @@ use Time::HiRes qw(gettimeofday);
 our $VERBOSE = 0;
 our @EXPORT_OK = qw(handle_header_abuse get_header_abuse_events);
 our @HEADER_ABUSE_EVENTS;
+our $VERSION = '0.03';
 
 sub handle_header_abuse {
     my ($entry) = @_;

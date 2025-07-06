@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME => 'ThreatDetector',
-    VERSION_FROM => 'lib/ThreatDetector/Parser.pm',
+    VERSION_FROM => 'lib/ThreatDetector/ThreatDetector.pm',
     AUTHOR => 'Jason Hall <jason.kei.hall@gmail.com>',
     ABSTRACT => 'Modular Apache Log Threat Detection for Vicidial',
     LICENSE => 'perl',
